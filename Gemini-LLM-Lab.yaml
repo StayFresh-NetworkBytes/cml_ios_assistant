@@ -1,0 +1,570 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: default
+        content: System Bridge
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: External_LAN
+    node_definition: external_connector
+    parameters: {}
+    ram: null
+    tags: []
+    x: -560
+    y: -80
+    interfaces:
+      - id: i0
+        label: port
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname IOL-AI-RTR
+          !
+          vrf definition mgmt
+           !
+           address-family ipv4
+           exit-address-family
+          !
+          ip domain name cml.lab
+          crypto key generate rsa modulus 4096
+          !
+          username netadmin privilege 15 secret 9 $9$03ukHZCc1yWP9k$Pn1hj784Y3.S4bbgpUv0nQy.wKsmSnt/8jw9EvaTfBY
+
+          !
+          interface Ethernet0/0
+           shutdown
+          !
+          interface Ethernet0/1
+           shutdown
+          !
+          interface Ethernet0/2
+           no ip address
+           shutdown
+          !
+          interface Ethernet0/3
+           no ip address
+           shutdown
+          !
+          interface Ethernet1/0
+           no ip address
+           shutdown
+          !
+          interface Ethernet1/1
+           no ip address
+           shutdown
+          !
+          interface Ethernet1/2
+           no ip address
+           shutdown
+          !
+          interface Ethernet1/3
+           vrf forwarding mgmt
+           no shutdown
+           ip address 172.16.1.189 255.255.255.0
+          !
+          line con 0
+           exec-timeout 0 0
+           logging synchronous
+          line aux 0
+          line vty 0 4
+           exec-timeout 0 0
+           login local
+           transport input ssh
+          !
+          !
+          !
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: IOL-AI-RTR
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -40
+    y: -80
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        slot: 3
+        type: physical
+      - id: i5
+        label: Ethernet1/0
+        mac_address: null
+        slot: 4
+        type: physical
+      - id: i6
+        label: Ethernet1/1
+        mac_address: null
+        slot: 5
+        type: physical
+      - id: i7
+        label: Ethernet1/2
+        mac_address: null
+        slot: 6
+        type: physical
+      - id: i8
+        label: Ethernet1/3
+        mac_address: null
+        slot: 7
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname IOL-AI-SW1
+          !
+          vrf definition mgmt
+           !
+           address-family ipv4
+           exit-address-family
+          !
+          ip domain name cml.lab
+          crypto key generate rsa modulus 4096
+          !
+          username netadmin privilege 15 secret 9 $9$LbgmQvN3oCFEv.$jvInJ3p8D3rFg1XwMrpjjqNZzLFPoOBtN7zWsgw7Sg.
+          !
+          interface Ethernet0/0
+          shutdown
+          !
+          interface Ethernet0/1
+          shutdown
+          !
+          interface Ethernet0/2
+           shutdown
+          !
+          interface Ethernet0/3
+           description Management Interface
+           no shutdown
+           no switchport
+           vrf forwarding mgmt
+           ip address 172.16.1.190 255.255.255.0
+          !
+          line con 0
+           exec-timeout 0 0
+           logging synchronous
+          line aux 0
+          line vty 0 4
+           exec-timeout 0 0
+           login local
+           transport input ssh
+          !
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: IOL-AI-SW1
+    node_definition: ioll2-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 200
+    y: -80
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        slot: 3
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: |-
+          hostname IOL-AI-SW2
+          !
+          vrf definition mgmt
+           !
+           address-family ipv4
+           exit-address-family
+          !
+          ip domain name cml.lab
+          crypto key generate rsa modulus 4096
+          !
+          username netadmin privilege 15 secret 9 $9$LbgmQvN3oCFEv.$jvInJ3p8D3rFg1XwMrpjjqNZzLFPoOBtN7zWsgw7Sg.
+          !
+          interface Ethernet0/0
+          shutdown
+          !
+          interface Ethernet0/1
+          shutdown
+          !
+          interface Ethernet0/2
+           shutdown
+          !
+          interface Ethernet0/3
+           description Management Interface
+           no switchport
+           no shutdown
+           vrf forwarding mgmt
+           ip address 172.16.1.191 255.255.255.0
+          !
+          line con 0
+           exec-timeout 0 0
+           logging synchronous
+          line aux 0
+          line vty 0 4
+           exec-timeout 0 0
+           login local
+           transport input ssh
+          !
+          !
+          end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: IOL-AI-SW2
+    node_definition: ioll2-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -40
+    y: 120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i2
+        label: Ethernet0/1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i3
+        label: Ethernet0/2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i4
+        label: Ethernet0/3
+        mac_address: null
+        slot: 3
+        type: physical
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: true
+    id: n4
+    image_definition: null
+    label: unmanaged-switch-0
+    node_definition: unmanaged_switch
+    parameters: {}
+    ram: null
+    tags: []
+    x: -360
+    y: 120
+    interfaces:
+      - id: i0
+        label: port0
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i1
+        label: port1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i2
+        label: port2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i3
+        label: port3
+        mac_address: null
+        slot: 3
+        type: physical
+      - id: i4
+        label: port4
+        mac_address: null
+        slot: 4
+        type: physical
+      - id: i5
+        label: port5
+        mac_address: null
+        slot: 5
+        type: physical
+      - id: i6
+        label: port6
+        mac_address: null
+        slot: 6
+        type: physical
+      - id: i7
+        label: port7
+        mac_address: null
+        slot: 7
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          # this is a shell script which will be sourced at boot
+          hostname alpine0
+
+          # configurable user account
+          USERNAME=netadmin
+          PASSWORD=s3cr3tpw1
+
+          # configure networking
+          ip address add 192.168.100.1/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 192.168.100.254
+          ip link set mtu 1300 dev eth0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: alpine-0
+    node_definition: alpine
+    parameters: {}
+    ram: null
+    tags: []
+    x: 400
+    y: -80
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          # this is a shell script which will be sourced at boot
+          hostname alpine0
+
+          # configurable user account
+          USERNAME=netadmin
+          PASSWORD=s3cr3tpw1
+
+          # configure networking
+          ip address add 192.168.200.1/24 dev eth0
+          ip link set dev eth0 up
+          ip route add default via 192.168.200.254
+          ip link set mtu 1300 dev eth0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: alpine-1
+    node_definition: alpine
+    parameters: {}
+    ram: null
+    tags: []
+    x: -40
+    y: 320
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: user-data
+        content: |-
+          #cloud-config
+          hostname: ubuntu-jumphost
+          manage_etc_hosts: True
+          system_info:
+            default_user:
+             name: netadmin
+          password: s3cr3tpw1
+          chpasswd: { expire: False }
+          ssh_pwauth: True
+          ssh_authorized_keys:
+          - ssh-rsa <SomeRemovedPublicKey>
+          write_files:
+          - path: /etc/netplan/network.yaml
+            permissions: '0600'
+            content: |
+              network:
+                version: 2
+                ethernets:
+                  ens2:
+                  #External LAN - Set to an available address on your personal network
+                    dhcp4: false
+                    addresses:
+                    - 192.168.1.190/24
+                    routes:
+                    - to: default
+                      via: 192.168.1.1
+                    nameservers:
+                      addresses:
+                      - 192.168.1.1
+                  ens3:
+                  # Out of Band network
+                    dhcp4: false
+                    addresses:
+                    - 172.16.1.10/24
+          runcmd:
+          - sudo netplan generate
+          - sudo netplan apply
+          - sudo apt update
+          - sudo apt full-upgrade -y
+          - sudo apt install python3 python3-pip python3-venv git -y
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n7
+    image_definition: null
+    label: Ubuntu-Jumphost
+    node_definition: ubuntu
+    parameters: {}
+    ram: null
+    tags: []
+    x: -360
+    y: -80
+    interfaces:
+      - id: i0
+        label: ens2
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i1
+        label: ens3
+        mac_address: null
+        slot: 1
+        type: physical
+links:
+  - id: l0
+    n1: n2
+    n2: n1
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: iol-l2-0-Ethernet0/0<->iol-0-Ethernet0/0
+  - id: l1
+    n1: n1
+    n2: n3
+    i1: i2
+    i2: i1
+    conditioning: {}
+    label: iol-0-Ethernet0/1<->iol-l2-1-Ethernet0/0
+  - id: l2
+    n1: n4
+    n2: n1
+    i1: i0
+    i2: i8
+    conditioning: {}
+    label: unmanaged-switch-0-port0<->iol-0-Ethernet1/3
+  - id: l3
+    n1: n2
+    n2: n4
+    i1: i4
+    i2: i1
+    conditioning: {}
+    label: iol-l2-0-Ethernet0/3<->unmanaged-switch-0-port1
+  - id: l4
+    n1: n3
+    n2: n4
+    i1: i4
+    i2: i2
+    conditioning: {}
+    label: iol-l2-1-Ethernet0/3<->unmanaged-switch-0-port2
+  - id: l5
+    n1: n5
+    n2: n2
+    i1: i0
+    i2: i2
+    conditioning: {}
+    label: alpine-0-eth0<->iol-l2-0-Ethernet0/1
+  - id: l6
+    n1: n6
+    n2: n3
+    i1: i0
+    i2: i2
+    conditioning: {}
+    label: alpine-1-eth0<->iol-l2-1-Ethernet0/1
+  - id: l7
+    n1: n0
+    n2: n7
+    i1: i0
+    i2: i0
+    conditioning: {}
+    label: External_LAN-port<->Ubuntu-Jumphost-ens2
+  - id: l8
+    n1: n7
+    n2: n4
+    i1: i1
+    i2: i3
+    conditioning: {}
+    label: Ubuntu-Jumphost-ens3<->unmanaged-switch-0-port3
+lab:
+  description: ''
+  notes: ''
+  title: Gemini-LLM-Lab
+  version: 0.3.0
