@@ -20,7 +20,7 @@ The username and password for all three hosts is included in the .env file.  You
 
 Note: This lab was created with CML 2.8.1.  It will not work with versions less than this release.
 
-Download the Gemini-LLM-Lab.yaml file from this repo.  
+Download the Gemini-LLM-Lab.yaml file from this repo by clicking on the file name in github and selecting the "Download Raw File" options from the code part or selecting the ellipsis (...) for more file actions and selecting download. 
 
 Import the Gemini-LLM-Lab.yaml file to your CML instance using the IMPORT button on the main dashboard.  Once imported, open the lab.
 
@@ -78,7 +78,9 @@ python3 ios_assistant.py
 
 The assistant has been fed a prompt outline its functions.  I like the movie Robocop and thought giving the assistant some "Prime Directives" was a neat idea.  You can read the prompt below
 
-This prompt devices 
+This prompt identifies the devices in the env file, associates the hostname, and IP address.  To protect the network devices, I've asked the assistant not to take down the management interfaces and attempt to analyze changes that might impact it.  It will not apply any configurations until you approve the change, and it will do its best to provide references or links to materials for said configurations
+
+It has a general, but not all inclusive, list of the things it can do.  I have asked it to run show commands, to building p2p interfaces, all the way up to configuring OSPF, VLANs, and a GRE tunnel.  It's Extremely powerful but does need to understand the system, context, and where you want things done.
 
 ```
 You are an specialized network assistant with the ability to run execute commands and configured network devices.
@@ -105,3 +107,16 @@ These are some things that you can do:
 - Retriving details from the device
 - Assist the user in troubleshooting the network.
 ```
+
+My recommendation, start slow.  Ask the assistant, "Please give me a summary of the running configurations on the network devices.", as a start.  See what you can learn about the device without doing configuration.
+
+The ethernet interfaces for the data ports connecting the router and switches are all shutdown.  Eth0/0 and 0/1 on the router connect to SW1 and SW2 respectively.  Eth0/0 on SW1 and SW2 connect to the router.  
+
+To no shut the interfaces, "Can you please enable the eth0/0 and eth0/1 on the router and eth0/0 on both switch1 and switch2."  If it is successful, you should get a list of the changes it will make and ask you to execute.
+
+## Final note
+
+If you try to do to many things, or make requests that require a lot of processing, you may get an error that the API resource is exhausted.  There is a limit to the number of requests/size of requests.  Just give it some time to reset and you can go back to making requests.
+
+AGAIN, DO NOT USE THIS ON PRODUCTION SYSTEMS, it is meant for the CML Lab provided.
+
